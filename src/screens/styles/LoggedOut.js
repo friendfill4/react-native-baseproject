@@ -1,7 +1,7 @@
 /**
- * Airbnb Clone App
- * @author: Andy
- * @Url: https://www.cubui.com
+ * IAbroad App
+ * @author: Jay
+ * @Url: https://www.friendfill.com
  */
 
 import { StyleSheet } from 'react-native';
@@ -35,7 +35,6 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     marginRight:10,
-    textAlignVertical:'top',
     marginBottom: 40,
   },
   welcomeText: {

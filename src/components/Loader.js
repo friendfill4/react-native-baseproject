@@ -1,7 +1,7 @@
 /**
- * Airbnb Clone App
- * @author: Andy
- * @Url: https://www.cubui.com
+ * IAbroad App
+ * @author: Jay
+ * @Url: https://www.friendfill.com
  */
 
 import React, { Component } from 'react';
@@ -19,6 +19,9 @@ export default class Loader extends Component {
     const { animationType, modalVisible } = this.props;
     return (
       <Modal
+        onRequestClose={()=>{
+          console.log("Modal Closed")
+        }}
         animationType={animationType}
         transparent
         visible={modalVisible}

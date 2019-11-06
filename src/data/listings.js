@@ -1,7 +1,7 @@
 /**
- * Airbnb Clone App
- * @author: Andy
- * @Url: https://www.cubui.com
+ * IAbroad App
+ * @author: Jay
+ * @Url: https://www.friendfill.com
  */
 import colors from '../styles/colors';
 

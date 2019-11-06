@@ -1,7 +1,7 @@
 /**
- * Airbnb Clone App
- * @author: Andy
- * @Url: https://www.cubui.com
+ * IAbroad App
+ * @author: Jay
+ * @Url: https://www.friendfill.com
  */
 
 import {
@@ -11,4 +11,4 @@ import {
 import App from './App';
 
 StatusBar.setBarStyle('light-content', true);
-AppRegistry.registerComponent('AirbnbClone', () => App);
+AppRegistry.registerComponent('IAbroad', () => App);

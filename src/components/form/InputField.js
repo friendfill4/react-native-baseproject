@@ -1,7 +1,7 @@
 /**
- * Airbnb Clone App
- * @author: Andy
- * @Url: https://www.cubui.com
+ * IAbroad App
+ * @author: Jay
+ * @Url: https://www.friendfill.com
  */
 
 import React, { Component } from 'react';
@@ -161,15 +161,18 @@ const styles = StyleSheet.create({
   },
   showButton: {
     position: 'absolute',
-    right: 0,
+    right: 20,
+    flex:1,
+    width:44
   },
   showButtonText: {
     color: colors.white,
-    fontWeight: '700',
+    fontWeight:'bold',
+    flex:1
   },
   checkmarkWrapper: {
     position: 'absolute',
-    right: 0,
+    right: 10,
     bottom: 12,
   },
 });

@@ -1,100 +1,55 @@
 /**
- * Airbnb Clone App
- * @author: Andy
- * @Url: https://www.cubui.com
+ * IAbroad App
+ * @author: Jay
+ * @Url: https://www.friendfill.com
  */
 
 import React, { Component } from 'react';
+import { SearchBar } from 'react-native-elements'; 
+import { PropTypes } from 'prop-types';
 import {
   View,
   Text,
   ScrollView,
   StyleSheet,
 } from 'react-native';
-import { graphql } from 'react-apollo';
-import gql from 'graphql-tag';
-import SearchBar from '../components/SearchBar';
-import Categories from '../components/explore/Categories';
-import Listings from '../components/explore/Listings';
 import colors from '../styles/colors';
-import categoriesList from '../data/categories';
-import listings from '../data/listings';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Creators as HomeCreators } from '../redux/actions/home';
+import PostCategories from '../components/explore/PostCategories';
+
 
 class ExploreContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      favouriteListings: [],
+      postCategories:[],
+      loadingPostCategories: false,
+      fetchPostCategoriesFailed:false
     };
-    this.handleAddToFav = this.handleAddToFav.bind(this);
-    this.renderListings = this.renderListings.bind(this);
-    this.onCreateListClose = this.onCreateListClose.bind(this);
+    this.props.fetchPostCategories();
   }
 
   componentWillReceiveProps(nextProps) {
     console.log(nextProps);
   }
 
-  handleAddToFav(listing) {
-    const { navigate } = this.props.navigation;
-    let { favouriteListings } = this.state;
-
-    const index = favouriteListings.indexOf(listing.id);
-    if (index > -1) {
-      favouriteListings = favouriteListings.filter(item => item !== listing.id);
-      this.setState({ favouriteListings });
-    } else {
-      navigate('CreateList', { listing, onCreateListClose: this.onCreateListClose });
-    }
-  }
-
-  onCreateListClose(listingId, listCreated) {
-    let { favouriteListings } = this.state;
-    if (listCreated) {
-      favouriteListings.push(listingId);
-    } else {
-      favouriteListings = favouriteListings.filter(item => item !== listingId);
-    }
-    this.setState({ favouriteListings });
-  }
-
-  renderListings() {
-    return listings.map((listing, index) => (
-      <View
-        key={`listing-${index}`}
-      >
-        <Listings
-          key={`listing-item-${index}`}
-          title={listing.title}
-          boldTitle={listing.boldTitle}
-          listings={listing.listings}
-          showAddToFav={listing.showAddToFav}
-          handleAddToFav={this.handleAddToFav}
-          favouriteListings={this.state.favouriteListings}
-        />
-      </View>
-    ));
-  }
-
   render() {
     const { data } = this.props;
-
-    console.log(data.multipleListings)
-
     return (
       <View style={styles.wrapper}>
-        <SearchBar />
+        <SearchBar
+          placeholder="Type Here..."
+        />
         <ScrollView
           style={styles.scrollview}
           contentContainerStyle={styles.scrollViewContent}
-        >
-          <Text style={styles.heading}>
-Explore Airbnb
-          </Text>
+        > 
+          <Text style={styles.heading}>Explore Us</Text>
           <View style={styles.categories}>
-            <Categories categories={categoriesList} />
+            <PostCategories postCategories={this.props.postCategories} />
           </View>
-          {this.renderListings()}
         </ScrollView>
       </View>
     );
@@ -107,33 +62,38 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   scrollview: {
-    paddingTop: 100,
+    paddingTop: 80,
   },
   scrollViewContent: {
     paddingBottom: 80,
   },
   categories: {
     marginBottom: 40,
+    paddingLeft:20,
+    paddingRight:20,
   },
   heading: {
     fontSize: 22,
     fontWeight: '600',
     paddingLeft: 20,
-    paddingBottom: 20,
+    marginBottom:5,
     color: colors.gray04,
   },
 });
 
 
-const ListingsQuery = gql`
-  query {
-    multipleListings{
-      title,
-      description
-    }
-  }
-`
+const mapStateToProps = (state) => {
+  console.log("<MAP>",state);
+  return {
+    postCategories:state.home.postCategories,
+    loadingPostCategories:state.home.loadingPostCategories,
+    fetchPostCategoriesFailed:state.home.fetchPostCategoriesFailed,
+  };
+};
 
-const ExploreContainerTab = graphql(ListingsQuery)(ExploreContainer);
+const mapDispatchToProps = dispatch => bindActionCreators(Object.assign({},HomeCreators), dispatch);
+ExploreContainer.propTypes = {
+  fetchPostCategories:PropTypes.func.isRequired,
+};
 
-export default ExploreContainerTab;
+export default connect(mapStateToProps, mapDispatchToProps)(ExploreContainer);

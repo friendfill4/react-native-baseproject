@@ -1,7 +1,7 @@
 /**
- * Airbnb Clone App
- * @author: Andy
- * @Url: https://www.cubui.com
+ * IAbroad App
+ * @author: Jay
+ * @Url: https://www.friendfill.com
  */
 
 import React, { Component } from 'react';
@@ -13,7 +13,9 @@ import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { Root, configureStore} from './src/navigators/AppNavigator';
 import { NETWORK_INTERFACE } from './src/config';
-
+import { mapping, light as lightTheme } from '@eva-design/eva';
+import { ApplicationProvider, Layout, Text } from 'react-native-ui-kitten';
+console.disableYellowBox = true;
 StatusBar.setBarStyle('light-content', true);
 
 const client = new ApolloClient({
@@ -24,10 +26,12 @@ const client = new ApolloClient({
 class App extends Component {
   render() {
   	return (
-      <Provider store={configureStore({})}>
+      <Provider store={configureStore()}>
+      <ApplicationProvider mapping={mapping} theme={lightTheme}>
         <ApolloProvider client={client}>
           <Root />
         </ApolloProvider>
+      </ApplicationProvider>
       </Provider>
     );
   }

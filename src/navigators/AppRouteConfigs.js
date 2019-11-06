@@ -3,6 +3,7 @@ import {
 } from 'react-navigation';
 import LoggedOut from '../screens/LoggedOut';
 import LogIn from '../screens/LogIn';
+import Splash from '../screens/Splash';
 import ForgotPassword from '../screens/ForgotPassword';
 import TurnOnNotifications from '../screens/TurnOnNotifications';
 import LoggedInTabNavigator from './LoggedInTabNavigator';
@@ -17,6 +18,7 @@ const AppRouteConfigs = createStackNavigator({
     },
   },
   LogIn: { screen: LogIn },
+  Splash: { screen: Splash },
   ForgotPassword: { screen: ForgotPassword },
   TurnOnNotifications: { screen: TurnOnNotifications },
 });

@@ -1,7 +1,7 @@
 /**
- * Airbnb Clone App
- * @author: Andy
- * @Url: https://www.cubui.com
+ * IAbroad App
+ * @author: Jay
+ * @Url: https://www.friendfill.com
  */
 
 import React, { Component } from 'react';
@@ -21,7 +21,7 @@ export default class Notification extends Component {
   constructor(props) {
   	super(props);
   	this.state = {
-      positionValue: new Animated.Value(-60),
+      positionValue: new Animated.Value(-10),
   	};
   	this.closeNotification = this.closeNotification.bind(this);
   	this.animateNotification = this.animateNotification.bind(this);
@@ -48,24 +48,19 @@ export default class Notification extends Component {
 
   render() {
   	const {
-      type, firstLine, secondLine, showNotification,
+      type, heading, content, showNotification,
     } = this.props;
-    showNotification ? this.animateNotification(0) : this.animateNotification(-60);
+    showNotification ? this.animateNotification(0) : this.animateNotification(-70);
   	const { positionValue } = this.state;
   	return (
     <Animated.View style={[{ marginBottom: positionValue }, styles.wrapper]}>
       <View style={styles.errorMessageContainer}>
-        <View style={styles.errorMessage}>
-          <Text style={styles.errorText}>
-            {type}
-          </Text>
-          <Text>
-            {firstLine}
-          </Text>
-        </View>
-        <Text style={styles.errorMessage}>
-          {secondLine}
-        </Text>
+            <Text style={(type=='error')?styles.errorText:styles.successText}>
+              {heading}
+            </Text>
+            <Text style={styles.notificationText}>
+              {content}
+            </Text>
       </View>
       <TouchableOpacity
         style={styles.closeButton}
@@ -85,8 +80,8 @@ export default class Notification extends Component {
 Notification.propTypes = {
   showNotification: PropTypes.bool.isRequired,
   type: PropTypes.string.isRequired,
-  firstLine: PropTypes.string,
-  secondLine: PropTypes.string,
+  heading: PropTypes.string,
+  content: PropTypes.string,
   handleCloseNotification: PropTypes.func,
 };
 
@@ -94,7 +89,7 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     backgroundColor: colors.white,
-    height: 60,
+    height: 70,
     padding: 10,
   },
   notificationContent: {
@@ -108,15 +103,26 @@ const styles = StyleSheet.create({
     marginRight: 5,
     fontSize: 14,
     marginBottom: 2,
+    fontWeight:'bold'    
+  },
+  successText: {
+    color: colors.green02,
+    marginRight: 5,
+    fontSize: 14,
+    marginBottom: 2,
+    fontWeight:'bold'
+  },
+  notificationText:{
+    marginBottom:5
   },
   errorMessage: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     flex: 1,
-    marginBottom: 2,
-    fontSize: 14,
+    marginBottom: 2,    
+    paddingBottom:3
   },
   errorMessageContainer: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     flex: 1,
     marginBottom: 2,
   },

@@ -1,14 +1,14 @@
 /**
- * Airbnb Clone App
- * @author: Andy
- * @Url: https://www.cubui.com
+ * IAbroad App
+ * @author: Jay
+ * @Url: https://www.friendfill.com
  */
 
 import React, { Component } from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {
   View,
-  Text,
+  TextInput,
   StyleSheet,
 } from 'react-native';
 import colors from '../styles/colors';
@@ -20,13 +20,12 @@ export default class SearchBar extends Component {
       <View style={styles.searchContainer}>
         <Icon
           name="ios-search"
-          size={20}
+          size={25}
           color={colors.gray02}
           style={styles.searchIcon}
         />
-        <Text style={styles.textInput}>
-Try "Cape Town"
-        </Text>
+        <TextInput underlineColorAndroid="transparent"  style={styles.textInput} placeholder='Try "Cape Town'>
+        </TextInput>
       </View>
     </View>
   	);
@@ -56,17 +55,19 @@ const styles = StyleSheet.create({
   	height: 40,
   	marginTop: 28,
   	marginLeft: 21,
-  	marginRight: 21,
+    marginRight: 21,
+    flexDirection:'row',
   },
   searchIcon: {
-  	position: 'absolute',
-  	left: 18,
-  	top: 9,
+    alignSelf:'center',
+    alignContent:'center',
+    flex:0.1,
+    textAlign:"center"
   },
   textInput: {
-    display: 'flex',
-    marginTop: 11,
-    marginLeft: 44,
-    color: colors.gray02,
+    padding:6,
+    flex:1,
+    textAlignVertical:'center',
+    color: colors.gray02,    
   },
 });
